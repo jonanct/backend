@@ -1,0 +1,15 @@
+server:
+  port: 8081 # Puerto del microservicio
+
+spring:
+  application:
+    name: buscador-service
+
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9200 # Conectar a Elasticsearch en Docker
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

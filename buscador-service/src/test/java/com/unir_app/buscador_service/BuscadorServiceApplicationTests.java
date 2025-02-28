@@ -1,11 +1,10 @@
-package com.unir_app.backend;
+package com.unir_app.buscador_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 @SpringBootTest
-class BackendApplicationTests {
+class BuscadorServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
