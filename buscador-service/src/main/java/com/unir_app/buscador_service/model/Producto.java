@@ -11,8 +11,9 @@ public class Producto {
     private String nombre;
     private String descripcion;
     private Double precio;
+    private String imageUrl; // Campo para la URL de la imagen
 
-    // Getters and setters
+    // Getters y setters
     public String getId() {
         return id;
     }
@@ -43,5 +44,13 @@ public class Producto {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -8,8 +8,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/productos")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductoController {
-    
+
     private final ProductoService service;
 
     public ProductoController(ProductoService service) {
@@ -17,17 +18,23 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto guardarProducto(@RequestBody Producto producto) {
-        return service.guardarProducto(producto);
-    }
-
-    @GetMapping("/buscar")
-    public List<Producto> buscarPorNombre(@RequestParam String nombre) {
-        return service.buscarPorNombre(nombre);
+    public Producto crearProducto(@RequestBody Producto producto) {
+        return service.crearProducto(producto);
     }
 
     @GetMapping
-    public Iterable<Producto> obtenerTodos() {
-        return service.obtenerTodos();
+    public List<Producto> obtenerProductos() {
+        return service.obtenerProductos();
+    }
+
+    @PutMapping("/{id}")
+    public Producto actualizarProducto(@PathVariable String id, @RequestBody Producto producto) {
+        producto.setId(id);
+        return service.actualizarProducto(producto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarProducto(@PathVariable String id) {
+        service.eliminarProducto(id);
     }
 }

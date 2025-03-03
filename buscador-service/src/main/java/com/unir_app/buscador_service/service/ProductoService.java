@@ -4,6 +4,7 @@ import com.unir_app.buscadorservice.model.Producto;
 import com.unir_app.buscadorservice.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,15 +16,21 @@ public class ProductoService {
         this.repository = repository;
     }
 
-    public Producto guardarProducto(Producto producto) {
+    public Producto crearProducto(Producto producto) {
         return repository.save(producto);
     }
 
-    public List<Producto> buscarPorNombre(String nombre) {
-        return repository.findByNombre(nombre);
+    public List<Producto> obtenerProductos() {
+        List<Producto> productos = new ArrayList<>();
+        repository.findAll().forEach(productos::add);
+        return productos;
     }
 
-    public Iterable<Producto> obtenerTodos() {
-        return repository.findAll();
+    public Producto actualizarProducto(Producto producto) {
+        return repository.save(producto);
+    }
+
+    public void eliminarProducto(String id) {
+        repository.deleteById(id);
     }
 }
