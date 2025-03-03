@@ -5,9 +5,10 @@ spring:
   application:
     name: buscador-service
 
-  data:
-    elasticsearch:
-      cluster-nodes: localhost:9200 # Conectar a Elasticsearch en Docker
+  elasticsearch:
+    uris: ${ELASTICSEARCH_URL:http://localhost:9200}
+    username: ${ELASTICSEARCH_USERNAME:elastic}
+    password: ${ELASTICSEARCH_PASSWORD:asupersecretpassword}
 
 eureka:
   client:
@@ -18,4 +19,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: "*"
