@@ -6,17 +6,26 @@ spring:
     name: buscador-service
 
   elasticsearch:
-    uris: ${ELASTICSEARCH_URL:http://localhost:9200}
+    uris: ${ELASTICSEARCH_URL:https://backend-production-092b.up.railway.app/:9200}
     username: ${ELASTICSEARCH_USERNAME:elastic}
     password: ${ELASTICSEARCH_PASSWORD:asupersecretpassword}
+    connection-timeout: 1s
+    socket-timeout: 30s
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://backend-production-092b.up.railway.app/eureka
+  instance:
+    health-check-url-path: /actuator/health
+    status-page-url-path: /actuator/info
+    hostname: buscador-service
 
 management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: health,info # Only expose health and info endpoints
+  endpoint:
+    health:
+      show-details: always

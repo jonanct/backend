@@ -8,6 +8,6 @@ RUN mvn clean package -DskipTests
 # Usa una imagen base de OpenJDK para ejecutar la aplicación
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/buscador-service-0.0.1-SNAPSHOT.jar app.jar
-EXPOSE 8080
+COPY --from=build /app/target/cloud-gateway-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8082
 ENTRYPOINT ["java", "-jar", "app.jar"]

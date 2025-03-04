@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/carritos")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://unir-app-jonathan-castros-projects-92c6cc81.vercel.app/")
 public class CarritoController {
 
     private final CarritoService service;

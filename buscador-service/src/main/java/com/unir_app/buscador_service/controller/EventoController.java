@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/eventos")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://unir-app-jonathan-castros-projects-92c6cc81.vercel.app/")
 public class EventoController {
 
     private final EventoService service;

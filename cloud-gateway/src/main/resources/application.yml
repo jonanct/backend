@@ -1,22 +1,79 @@
 server:
-  port: 8080 # Puerto en el que se ejecuta el gateway
+  port: 8082
 
 spring:
   application:
-    name: cloud-gateway # Nombre de la aplicación (para registro en Eureka)
+    name: cloud-gateway
   cloud:
     gateway:
       routes:
-        - id: microservicio1 # Identificador único de la ruta
-          uri: lb://microservicio1 # URI del microservicio (lb:// para balanceo de carga)
+        - id: buscador-service
+          uri: lb://buscador-service
           predicates:
-            - Path=/microservicio1/** # Predicado para las solicitudes que coinciden con este patrón
-        - id: microservicio2
-          uri: lb://microservicio2
+            - Path=/buscador/**
+          filters:
+            - RewritePath=/buscador/(?<path>.*), /$\{path}
+        - id: recomendador-service
+          uri: lb://recomendador-service
           predicates:
-            - Path=/microservicio2/**
-
+            - Path=/recomendador/**
+          filters:
+            - RewritePath=/recomendador/(?<path>.*), /$\{path}
+        - id: usuario-service
+          uri: lb://usuario-service
+          predicates:
+            - Path=/usuario/**
+          filters:
+            - RewritePath=/usuario/(?<path>.*), /$\{path}
+        - id: producto-service
+          uri: lb://producto-service
+          predicates:
+            - Path=/producto/**
+          filters:
+            - RewritePath=/producto/(?<path>.*), /$\{path}
+        - id: carrito-service
+          uri: lb://carrito-service
+          predicates:
+            - Path=/carrito/**
+          filters:
+            - RewritePath=/carrito/(?<path>.*), /$\{path}
+        - id: orden-service
+          uri: lb://orden-service
+          predicates:
+            - Path=/orden/**
+          filters:
+            - RewritePath=/orden/(?<path>.*), /$\{path}
+        - id: pago-service
+          uri: lb://pago-service
+          predicates:
+            - Path=/pago/**
+          filters:
+            - RewritePath=/pago/(?<path>.*), /$\{path}
+        - id: envio-service
+          uri: lb://envio-service
+          predicates:
+            - Path=/envio/**
+          filters:
+            - RewritePath=/envio/(?<path>.*), /$\{path}
+        - id: notificacion-service
+          uri: lb://notificacion-service
+          predicates:
+            - Path=/notificacion/**
+          filters:
+            - RewritePath=/notificacion/(?<path>.*), /$\{path}
+        - id: monitoreo-service
+          uri: lb://monitoreo-service
+          predicates:
+            - Path=/monitoreo/**
+          filters:
+            - RewritePath=/monitoreo/(?<path>.*), /$\{path}
+        - id: autenticacion-service
+          uri: lb://autenticacion-service
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka # URL del servidor Eureka
+      defaultZone: https://backend-production-092b.up.railway.app/eureka
+  instance:
+    health-check-url-path: /actuator/health
+    status-page-url-path: /actuator/info
+    hostname: cloud-gateway
